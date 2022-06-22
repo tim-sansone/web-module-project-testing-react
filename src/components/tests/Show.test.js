@@ -52,4 +52,18 @@ test('handleSelect is called when an season is selected', () => {
 
 });
 
-test('component renders when no seasons are selected and when rerenders with a season passed in', () => { });
+test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
+    const { rerender } = render(<Show show={data} selectedSeason="none"/>)
+
+    let episodes = screen.queryByTestId("episodes-container")
+
+    expect(episodes).toBeNull();
+    expect(episodes).not.toBeInTheDocument();
+
+    rerender(<Show show={data} selectedSeason="1"/>)
+
+    episodes = screen.queryByTestId("episodes-container")
+
+    expect(episodes).not.toBeNull();
+    expect(episodes).toBeInTheDocument();
+});
